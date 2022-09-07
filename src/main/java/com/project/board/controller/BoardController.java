@@ -13,15 +13,15 @@ public class BoardController {
 
     private final BoardService boardService;
 
-    @GetMapping("/board/write")
+    @GetMapping("")
     public String boardWriteForm(){
         return "boardWrite";
     }
 
-    @PostMapping("/board/writepro")
+    @PostMapping("")
     public String boardWritePro(Board board){
         boardService.write(board);
-        return "";
+        return "redirect:/";
     }
 
     @GetMapping("/board/list")
@@ -30,6 +30,11 @@ public class BoardController {
         return "boardList";
     }
 
+    @GetMapping("/board/view/{id}")
+    public String boardView(@PathVariable("id") Long id, Model model){
+        model.addAttribute("board", boardService.boardView(id));
+        return "boardView";
+    }
 
 
 }
